@@ -26,7 +26,8 @@ enum layer_names {
   _NUMBER,
   _SYMBOL,
   _NAV,
-  _DEV
+  _DEV,
+  _TESTS
 };
 
 #define FZ_EXT G(S(KC_UP))
@@ -47,13 +48,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LGUI, KC_LALT, MO(3), MO(1), KC_SPC, KC_SPC, MO(2), MO(4),   KC_LALT, KC_LGUI, KC_LCTL
     ),
     [_NUMBER] = LAYOUT_ortho_4x12(
-        KC_NO,   KC_F1, KC_F2,  KC_F3,  KC_F4,  KC_NO, KC_NO, KC_7, KC_8, KC_9,   KC_NO, KC_NO,
+        KC_NO,   KC_F1, KC_F2,  KC_F3,  KC_F4,  KC_NO, KC_NO, KC_7, KC_8, KC_9,   KC_NO, KC_BSPC,
         KC_NO,   KC_F5, KC_F6,  KC_F7,  KC_F8,  KC_NO, KC_NO, KC_4, KC_5, KC_6,   KC_NO, KC_NO,
         KC_NO,   KC_F9, KC_F10, KC_F11, KC_F12, KC_NO, KC_NO, KC_1, KC_2, KC_3,   KC_NO, KC_RSFT,
         KC_WAKE, KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO, KC_NO, KC_0, KC_0, KC_DOT, KC_NO, KC_RCTL
     ),
     [_SYMBOL] = LAYOUT_ortho_4x12(
-        KC_GRV, S(KC_1),     S(KC_2), S(KC_3),     S(KC_4),     S(KC_5),  KC_NO,       KC_NO,   KC_NO,      KC_NO,   KC_NO,    KC_DELETE,
+        KC_GRV, S(KC_1),     S(KC_2), S(KC_3),     S(KC_4),     S(KC_5),  KC_NO,       DV_ARR,   KC_NO,      KC_NO,   KC_NO,    KC_DELETE,
         KC_NO,  S(KC_SLASH), KC_NO,   KC_MINUS,    KC_EQUAL,    S(KC_8),  S(KC_COMMA), S(KC_9), S(KC_LBRC), KC_LBRC, KC_SLASH, S(KC_7),
         KC_NO,  S(KC_6),     KC_NO,   S(KC_MINUS), S(KC_EQUAL), KC_SLASH, S(KC_DOT),   S(KC_0), S(KC_RBRC), KC_RBRC, KC_BSLS,  S(KC_BSLS),
         KC_NO,  KC_NO,       KC_NO,   KC_NO,       KC_NO,       KC_NO,    KC_NO,       KC_NO,   KC_NO,      KC_NO,   KC_NO,    KC_NO
@@ -62,13 +63,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, FZ_EXT, FZ_LFT, FZ_RGT, KC_NO,  KC_NO,   KC_NO, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
         KC_NO, WO_LFT, WO_RGT, WO_SLF, WO_SRG, WO_SELN, KC_NO, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_WH_U,
         KC_NO, KC_NO,  KC_NO,  WO_SDW, WO_SUP, KC_NO,   KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_WH_D,
-        KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,   KC_NO, KC_NO,   KC_NO,   KC_LALT, KC_LGUI,  KC_LCTL
+        KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,   KC_NO, MO(5),   KC_NO,   KC_LALT, KC_LGUI,  KC_LCTL
     ),
     [_DEV] = LAYOUT_ortho_4x12(
-        AS_RPT,  RGB_TOG, RGB_VAI, RGB_M_P,  RGB_M_SN, KC_NO, KC_F9, KC_F5,     KC_F10, KC_F11, S(KC_F11), C(S(KC_B)),
-        AS_UP,   RGB_MOD, RGB_VAD, RGB_M_P,  RGB_M_K,  KC_NO, KC_NO, C(KC_F12), KC_NO,  KC_NO,  KC_NO,     KC_NO,
-        AS_DOWN, KC_NO,   RGB_SPI, RGB_M_R,  RGB_M_X,  KC_NO, KC_NO, DV_ARR,    KC_NO,  KC_NO,  KC_NO,     KC_NO,
-        AS_TOGG, KC_NO,   RGB_SPD, RGB_M_SW, RGB_M_G,  KC_NO, KC_NO, KC_NO,     KC_NO,  KC_NO,  KC_NO,     KC_NO
+        C(KC_GRV),  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_F9, KC_F5,     KC_F10, KC_F11, S(KC_F11), C(S(KC_B)),
+        KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, C(KC_F12), KC_NO,  KC_NO,  KC_NO,     KC_NO,
+        KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,  KC_NO,  KC_NO,     KC_NO,
+        KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,  KC_NO,  KC_NO,     KC_NO
+    ),
+    [_TESTS] = LAYOUT_ortho_4x12(
+        AS_RPT,  RGB_TOG,  RGB_VAI, RGB_HUI, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+        AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, KC_NO,  KC_NO, KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
+        AS_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+        AS_TOGG, KC_NO,    RGB_SPD, RGB_SAD, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
     )
 };
 

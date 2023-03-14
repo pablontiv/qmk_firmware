@@ -39,6 +39,8 @@ enum layer_names {
 #define WO_SRG C(S(KC_RIGHT))
 #define WO_SDW S(KC_DOWN)
 #define WO_SUP S(KC_UP)
+#define WD_CLO C(KC_F4)
+#define WI_CLO A(KC_F4)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_ortho_4x12(
@@ -60,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,  KC_NO,       KC_NO,   KC_NO,       KC_NO,       KC_NO,    KC_NO,       KC_NO,   KC_NO,      KC_NO,   KC_NO,    KC_NO
     ),
     [_NAV] = LAYOUT_ortho_4x12(
-        KC_NO, FZ_EXT, FZ_LFT, FZ_RGT, KC_NO,  KC_NO,   KC_NO, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
+        KC_NO, FZ_EXT, FZ_LFT, FZ_RGT, WD_CLO,  WI_CLO,   KC_NO, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
         KC_NO, WO_LFT, WO_RGT, WO_SLF, WO_SRG, WO_SELN, KC_NO, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_WH_U,
         KC_NO, KC_NO,  KC_NO,  WO_SDW, WO_SUP, KC_NO,   KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_WH_D,
         KC_NO, KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,   KC_NO, MO(5),   KC_NO,   KC_LALT, KC_LGUI,  KC_LCTL

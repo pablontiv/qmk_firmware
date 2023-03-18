@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_GESC, KC_Q,    KC_W,    KC_E,  KC_R,  KC_T,   KC_Y,   KC_U,  KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,  KC_F,  KC_G,   KC_H,   KC_J,  KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,  KC_V,  KC_B,   KC_N,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
-    KC_LCTL, KC_LGUI, KC_LALT, MO(4), MO(1), KC_SPC, KC_SPC, MO(2), MO(3),   KC_LALT, KC_LGUI, KC_LCTL
+    KC_LCTL, KC_LGUI, KC_LALT, MO(4), MO(1), LT(5,KC_SPC), KC_SPC, MO(2), MO(3),   KC_LALT, KC_LGUI, KC_LCTL
   ),
   [_NUMBER] = LAYOUT_ortho_4x12(
     ___,   KC_F1, KC_F2,  KC_F3,  KC_F4,  ___, ___, KC_7, KC_8, KC_9,   ___, KC_BSPC,
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ___, FZ_EXT, FZ_LFT, FZ_RGT, WD_CLO,  WI_CLO,   ___, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
     ___, ___, ___, ___, ___, ___, ___, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_WH_U,
     ___, ___,  ___,  ___, ___, ___,   ___, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_WH_D,
-    ___, ___,  ___,  ___,  ___,  ___,   ___, MO(5),   ___,   KC_LALT, KC_LGUI,  KC_LCTL
+    ___, ___,  ___,  ___,  ___,  ___,   ___, ___,   ___,   KC_LALT, KC_LGUI,  KC_LCTL
   ),
   [_DEV] = LAYOUT_ortho_4x12(
     C(KC_GRV),  C(S(KC_GRV)), C(KC_PGDN), ___, ___, ___, ___, ___,     ___, ___, ___, ___,
@@ -81,10 +81,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ___,      ___, ___, ___, ___, ___, ___, ___,     ___,  ___,  ___,     ___
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
-    AS_RPT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, ___,
-    AS_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    AS_TOGG, ___,    RGB_SPD, RGB_SAD, ___,  ___, ___, ___, ___, ___, ___, ___
+    DT_PRNT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___, ___, ___, ___, ___, ___,
+    DT_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, ___,
+    DT_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, ___, ___, ___, ___, ___, ___,
+    ___, ___,    RGB_SPD, RGB_SAD, ___,  ___, ___, ___, ___, ___, ___, ___
   )
 };
 

@@ -81,9 +81,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ___,      ___, ___, ___, ___, ___, ___, ___,     ___,  ___,  ___,     ___
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
-    DT_PRNT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    DT_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, ___,
-    DT_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, ___, ___, ___, ___, ___, ___,
+    AS_RPT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___, ___, ___, ___, ___, ___,
+    AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, ___,
+    AS_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, ___, ___, ___, ___, ___, ___,
     ___, ___,    RGB_SPD, RGB_SAD, ___,  ___, ___, ___, ___, ___, ___, ___
   )
 };

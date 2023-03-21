@@ -21,6 +21,8 @@ enum layer_names {
 #define WO_SRG C(S(KC_RIGHT))
 #define WO_SDW S(KC_DOWN)
 #define WO_SUP S(KC_UP)
+#define LN_UP A(KC_UP)
+#define LN_DN A(KC_DOWN)
 
 // Windows management keycodes
 #define WD_CLO C(KC_F4)
@@ -90,8 +92,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_DEV] = LAYOUT_ortho_4x12(
     C(KC_GRV),  C(S(KC_GRV)), C(KC_PGDN), ___, ___, ___, ___, ___,     ___, ___, ___, ___,
-    C(S(KC_B)), KC_F9, KC_F10, KC_F11, S(KC_F11), KC_F5, ___, WO_LFT, WO_SLF,  WO_SUP,  ___,     ___,
-    ___,      ___, ___, ___, ___, C(KC_F12), ___, WO_RGT,     WO_SRG,  WO_SDW,  ___,     ___,
+    C(S(KC_B)), KC_F9, KC_F10, KC_F11, S(KC_F11), KC_F5, LN_UP, WO_LFT, WO_SLF,  WO_SUP,  ___,     ___,
+    ___,      ___, ___, ___, ___, C(KC_F12), LN_DN, WO_RGT,     WO_SRG,  WO_SDW,  ___,     ___,
     ___,      ___, ___, ___, ___, ___, ___, ___,     ___,  ___,  ___,     ___
   ),
   [_TESTS] = LAYOUT_ortho_4x12(

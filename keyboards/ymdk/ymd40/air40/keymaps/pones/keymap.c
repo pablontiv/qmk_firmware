@@ -10,48 +10,32 @@ enum layer_names {
 };
 
 // Fancy zones keycodes
-#define FZ_EXT G(S(KC_UP))
-#define FZ_LFT G(KC_LEFT)
-#define FZ_RGT G(KC_RIGHT)
+#define FZ_EXT G(S(KC_UP)) // Expand window vertically
+#define FZ_LFT G(KC_LEFT) // Move window to previous area
+#define FZ_RGT G(KC_RIGHT) // Move window to next area
 
 // Word navigation and selection keycodes
-#define WO_LFT C(KC_LEFT)
-#define WO_RGT C(KC_RIGHT)
-#define WO_SLF C(S(KC_LEFT))
-#define WO_SRG C(S(KC_RIGHT))
-#define WO_SDW S(KC_DOWN)
-#define WO_SUP S(KC_UP)
-#define LN_UP A(KC_UP)
-#define LN_DN A(KC_DOWN)
+#define WO_LFT C(KC_LEFT) // Move to previous word
+#define WO_RGT C(KC_RIGHT) // Move to next word
+#define WO_SLF C(S(KC_LEFT)) // Select previous word
+#define WO_SRG C(S(KC_RIGHT)) // Select next word
+#define WO_SDW S(KC_DOWN) // Select previous line
+#define WO_SUP S(KC_UP) // Select next line
+#define LN_UP A(KC_UP) // Move line up
+#define LN_DN A(KC_DOWN) // Move line down
 
 // Windows management keycodes
-#define WD_CLO C(KC_F4)
-#define WI_CLO A(KC_F4)
-// #define WD_CYC C(KC_TAB)
-// #define WD_RCY C(S(KC_TAB))
-// #define WI_CYC A(KC_TAB)
-// #define WI_RCY A(KC_TAB)
-
-// // Left-hand home row mods
-// #define GUI_A LGUI_T(KC_A)
-// #define ALT_S LALT_T(KC_S)
-// #define CTL_D LCTL_T(KC_D)
-// #define SFT_F LSFT_T(KC_F)
-
-// // Right-hand home row mods
-// #define SFT_J RSFT_T(KC_J)
-// #define CTL_K RCTL_T(KC_K)
-// #define ALT_L LALT_T(KC_L)
-// #define GUI_SCLN RGUI_T(KC_SCLN)
+#define WD_CLO C(KC_F4) // Close document or tab
+#define WI_CLO A(KC_F4) // Close window
 
 // Shorthand macros
 #define TAP(x) tap_code16(x)
 #define ___ KC_NO
 
 enum custom_keycodes {
-  DV_ARR = SAFE_RANGE,
-  DV_COMM,
-  DV_UNCOM
+  DV_ARR = SAFE_RANGE, // Print C# lambda arrow
+  DV_COMM, // Comment line
+  DV_UNCOM // Uncomment line
 };
 
 enum combo_events {
@@ -68,10 +52,8 @@ const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_ortho_4x12(
     QK_GESC, KC_Q,    KC_W,    KC_E,  KC_R,  KC_T,   KC_Y,   KC_U,  KC_I,    KC_O,    KC_P,    KC_BSPC,
-    // KC_TAB,  GUI_A,    ALT_S,    CTL_D,  SFT_F,  KC_G,   KC_H,   SFT_J,  CTL_K,    ALT_L,    GUI_SCLN, KC_QUOT,
     KC_TAB,  KC_A,    KC_S,    KC_D,  KC_F,  KC_G,   KC_H,   KC_J,  KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,  KC_V,  KC_B,   KC_N,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
-    // ___, ___, ___, MO(4), MO(1), LT(5,KC_SPC), KC_SPC, MO(2), MO(3),   ___, ___, ___
     KC_LCTL, KC_LGUI, KC_LALT, MO(4), TT(1), LT(5,KC_SPC), KC_SPC, MO(2), TT(3),   KC_LALT, KC_LGUI, KC_LCTL
   ),
   [_NUMBER] = LAYOUT_ortho_4x12(

@@ -28,9 +28,37 @@ enum layer_names {
 #define WD_CLO C(KC_F4) // Close document or tab
 #define WI_CLO A(KC_F4) // Close window
 
-// Shorthand macros
+// Shorthand macros and keycodes
 #define TAP(x) tap_code16(x)
 #define ___ KC_NO
+#define SPC_TE LT(5,KC_SPC) // Space on tap Test layer on hold
+#define DV_TRM C(KC_GRV) // VS Code terminal
+#define DV_NTRM C(S(KC_GRV)) // VS Code new terminal
+#define DV_CTRM C(KC_PGDN) // VS Code cycle terminal
+#define DV_BLD C(S(KC_B)) // VS build
+#define DV_BRKP KC_F9 // VS breakpoint
+#define DV_SOUT S(KC_F11) // VS Step Out
+#define DV_SIN KC_F11 // VS Step Into
+#define DV_SOVR KC_F10 // VS Step Over
+#define DV_GIMP C(KC_F12) // VS Go to Implementation
+#define SY_EXCL S(KC_1) // Exclamation mark
+#define SY_ARB S(KC_2) // Arobase
+#define SY_NUM S(KC_3) // Number
+#define SY_CRCY S(KC_4) // Currency
+#define SY_PERC S(KC_5) // Percent
+#define SY_CRT S(KC_6) // Caret
+#define SY_AMP S(KC_7) // Ampersand
+#define SY_ASTK S(KC_8) // Asterisk
+#define SY_QSTN S(KC_SLASH) // Question mark
+#define SY_LPRN S(KC_9) // Left parenthesis
+#define SY_RPRN S(KC_0) // Right parenthesis
+#define SY_UND S(KC_MINUS) // Underscore
+#define SY_PLS S(KC_EQUAL) // Plus
+#define SY_LCRY S(KC_LBRC) // Left curly braces
+#define SY_RCRY S(KC_RBRC) // Right curly braces
+#define SY_PIP S(KC_BSLS) // Pipe
+#define SY_GRT S(KC_DOT) // Greater than
+#define SY_LST S(KC_COMMA) // Less than
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
@@ -54,37 +82,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_GESC, KC_Q,    KC_W,    KC_E,  KC_R,  KC_T,   KC_Y,   KC_U,  KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,  KC_F,  KC_G,   KC_H,   KC_J,  KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,  KC_V,  KC_B,   KC_N,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
-    KC_LCTL, KC_LGUI, KC_LALT, MO(4), TT(1), LT(5,KC_SPC), KC_SPC, MO(2), TT(3),   KC_LALT, KC_LGUI, KC_LCTL
+    KC_LCTL, KC_LGUI, KC_LALT, MO(4), TT(1), SPC_TE, KC_SPC, MO(2), TT(3),   KC_LALT, KC_LGUI, KC_LCTL
   ),
   [_NUMBER] = LAYOUT_ortho_4x12(
     TO(0),   KC_F1, KC_F2,  KC_F3,  KC_F4,  ___, ___, KC_7, KC_8, KC_9,   KC_EQUAL, KC_BSPC,
-    ___,     KC_F5, KC_F6,  KC_F7,  KC_F8,  ___, ___, KC_4, KC_5, KC_6,   S(KC_EQUAL), KC_MINUS,
-    ___,     KC_F9, KC_F10, KC_F11, KC_F12, ___, ___, KC_1, KC_2, KC_3,   S(KC_8), KC_SLASH,
-    KC_WAKE, ___,   ___,    ___,    ___,    ___, ___, KC_0, KC_0, KC_DOT, KC_ENT, ___
+    ___,     KC_F5, KC_F6,  KC_F7,  KC_F8,  ___, ___, KC_4, KC_5, KC_6,   SY_PLS,   KC_MINUS,
+    ___,     KC_F9, KC_F10, KC_F11, KC_F12, ___, ___, KC_1, KC_2, KC_3,   SY_ASTK,  KC_SLASH,
+    KC_WAKE, ___,   ___,    ___,    ___,    ___, ___, KC_0, KC_0, KC_DOT, KC_ENT,   ___
   ),
   [_SYMBOL] = LAYOUT_ortho_4x12(
-    KC_GRV, S(KC_1),     S(KC_2), S(KC_3),     S(KC_4),     S(KC_5),  ___,       DV_ARR,   ___,      ___,   ___,    KC_DELETE,
-    ___,  S(KC_SLASH), ___,   KC_MINUS,    KC_EQUAL,    S(KC_8),  S(KC_COMMA), S(KC_9), S(KC_LBRC), KC_LBRC, KC_SLASH, S(KC_7),
-    ___,  S(KC_6),     ___,   S(KC_MINUS), S(KC_EQUAL), KC_SLASH, S(KC_DOT),   S(KC_0), S(KC_RBRC), KC_RBRC, KC_BSLS,  S(KC_BSLS),
-    ___,  ___,       ___,   ___,       ___,       ___,    ___,       ___,   ___,      ___,   ___,    ___
+    KC_GRV, SY_EXCL, SY_ARB, SY_NUM,   SY_CRCY,  SY_PERC,  ___,    DV_ARR,   ___,       ___,     ___,   KC_DEL,
+    ___,    SY_QSTN, ___,    KC_MINUS, KC_EQUAL, SY_ASTK,  SY_LST, SY_LPRN, SY_LCRY, KC_LBRC, KC_SLASH, SY_AMP,
+    ___,    SY_CRT,  ___,    SY_UND,   SY_PLS,   KC_SLASH, SY_GRT, SY_RPRN, SY_RCRY, KC_RBRC, KC_BSLS,  SY_PIP,
+    ___,    ___,     ___,    ___,      ___,      ___,      ___,    ___,     ___,        ___,     ___,    ___
   ),
   [_NAV] = LAYOUT_ortho_4x12(
-    TO(0), FZ_EXT, FZ_LFT, FZ_RGT, WD_CLO,  WI_CLO,   ___, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
-    ___, ___, ___, ___, ___, ___, ___, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_WH_U,
-    ___, ___,  ___,  ___, ___, ___,   ___, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_WH_D,
-    ___, ___,  ___,  ___,  ___,  ___,   ___, ___,   ___,   ___, ___,  ___
+    TO(0), FZ_EXT,  FZ_LFT,  FZ_RGT,  WD_CLO,  WI_CLO,  ___, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
+    ___,   KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, ___, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_WH_U,
+    ___,   ___,     ___,     ___,     ___,     ___,     ___, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_WH_D,
+    ___,   ___,     ___,     ___,     ___,     ___,     ___, ___,     ___,     ___,     ___,      ___
   ),
   [_DEV] = LAYOUT_ortho_4x12(
-    C(KC_GRV),  C(S(KC_GRV)), C(KC_PGDN), ___, ___, ___, ___, ___,     ___, ___, ___, ___,
-    C(S(KC_B)), KC_F9, KC_F10, KC_F11, S(KC_F11), KC_F5, LN_UP, WO_LFT, WO_SLF,  WO_SUP,  DV_COMM,     ___,
-    ___,      ___, ___, ___, ___, C(KC_F12), LN_DN, WO_RGT,     WO_SRG,  WO_SDW,  DV_UNCOM,     ___,
-    ___,      ___, ___, ___, ___, ___, ___, ___,     ___,  ___,  ___,     ___
+    DV_TRM,  DV_NTRM, DV_CTRM, ___,    ___,     ___,   ___,   ___,    ___,    ___,    ___,      ___,
+    DV_BLD,  DV_BRKP, DV_SOUT, DV_SIN, DV_SOVR, KC_F5, LN_UP, WO_LFT, WO_SLF, WO_SUP, DV_COMM,  ___,
+    ___,     ___,     ___,     ___,    DV_GIMP, ___,   LN_DN, WO_RGT, WO_SRG, WO_SDW, DV_UNCOM, ___,
+    ___,     ___,     ___,     ___,    ___,     ___,   ___,   ___,    ___,    ___,    ___,      ___
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
     AS_RPT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, ___,
+    AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, ___, ___, ___, ___, ___, ___,
     AS_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    ___, ___,    RGB_SPD, RGB_SAD, ___,  ___, ___, ___, ___, ___, ___, ___
+    ___, ___,    RGB_SPD, RGB_SAD, ___,  ___,  ___, ___, ___, ___, ___, ___
   )
 };
 

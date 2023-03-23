@@ -97,22 +97,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ___,    ___,     ___,    ___,      ___,      ___,      ___,    ___,     ___,        ___,     ___,    ___
   ),
   [_NAV] = LAYOUT_ortho_4x12(
-    TO(0), FZ_EXT,  FZ_LFT,  FZ_RGT,  WD_CLO,  WI_CLO,  ___, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_BTN1,
-    ___,   KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, ___, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_WH_U,
-    ___,   ___,     ___,     ___,     ___,     ___,     ___, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_WH_D,
-    ___,   ___,     ___,     ___,     ___,     ___,     ___, ___,     ___,     ___,     ___,      ___
+    TO(0), ___, ___, ___, WD_CLO,  WI_CLO,  ___,   KC_HOME, KC_PGUP, KC_PGDN, KC_END,   FZ_EXT,
+    ___,   ___, ___, ___, ___,     ___,     LN_UP, KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT, FZ_LFT,
+    ___,   ___, ___, ___, ___,     ___,     LN_DN, WO_LFT,  WO_SLF,  WO_SRG,  WO_RGT,   FZ_RGT,
+    ___,   ___, ___, ___, ___,     ___,     ___,   ___,     ___,     ___,     ___,      ___
   ),
   [_DEV] = LAYOUT_ortho_4x12(
-    DV_TRM,  DV_NTRM, DV_CTRM, ___,    ___,     ___,   ___,   ___,    ___,    ___,    ___,      ___,
-    DV_BLD,  DV_BRKP, DV_SOUT, DV_SIN, DV_SOVR, KC_F5, LN_UP, WO_LFT, WO_SLF, WO_SUP, DV_COMM,  ___,
-    ___,     ___,     ___,     ___,    DV_GIMP, ___,   LN_DN, WO_RGT, WO_SRG, WO_SDW, DV_UNCOM, ___,
-    ___,     ___,     ___,     ___,    ___,     ___,   ___,   ___,    ___,    ___,    ___,      ___
+    DV_TRM,  DV_NTRM, DV_CTRM, ___,      ___,     ___,   ___, ___, ___, ___, ___, ___,
+    DV_BLD,  DV_BRKP, DV_SOUT, DV_SIN,   DV_SOVR, KC_F5, ___, ___, ___, ___, ___, ___,
+    ___,     DV_GIMP,     ___, DV_UNCOM, DV_COMM, ___,   ___, ___, ___, ___, ___, ___,
+    ___,     ___,     ___,     ___,      ___,     ___,   ___, ___, ___, ___, ___, ___
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
-    AS_RPT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, ___, ___, ___, ___, ___, ___,
-    AS_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, ___, ___, ___, ___, ___, ___,
-    ___, ___,    RGB_SPD, RGB_SAD, ___,  ___,  ___, ___, ___, ___, ___, ___
+    AS_RPT,  RGB_TOG,  RGB_VAI, RGB_HUI, ___,  ___, ___,     KC_BTN1, KC_WH_U, KC_WH_D, ___,     ___,
+    AS_UP,   RGB_MOD,  RGB_VAD, RGB_HUD, ___,  ___, ___,     KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, ___,
+    AS_DOWN, RGB_RMOD, RGB_SPI, RGB_SAI, ___,  ___, KC_MPLY, KC_MPRV, KC_VOLU, KC_VOLD, KC_MNXT, ___,
+    ___,     ___,      RGB_SPD, RGB_SAD, ___,  ___, ___,     ___,     ___,     ___,     ___,     ___
   )
 };
 

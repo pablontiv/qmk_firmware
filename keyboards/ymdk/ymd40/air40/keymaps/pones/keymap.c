@@ -4,7 +4,6 @@ enum layer_names {
   _QWERTY,
   _NUMBER,
   _SYMBOL,
-  _NAV,
   _DEV,
   _TESTS,
   _GAME
@@ -31,7 +30,7 @@ enum layer_names {
 
 // Shorthand macros and keycodes
 #define TAP(x) tap_code16(x)
-#define SPC_TE LT(5,KC_SPC) // Space on tap Test layer on hold
+#define SPC_TE LT(4,KC_SPC) // Space on tap Test layer on hold
 #define DV_TRM C(KC_GRV) // VS Code terminal
 #define DV_NTRM C(S(KC_GRV)) // VS Code new terminal
 #define DV_CTRM C(KC_PGDN) // VS Code cycle terminal
@@ -71,18 +70,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  | Alt  | Dev  |Number|    Space    |Symbol| Nav  | Alt  | GUI  | Ctrl |
+ * | Ctrl | GUI  | Alt  | Nav  |Number|    Space    |Symbol|      | Alt  | GUI  | Ctrl |
  * `-----------------------------------------------------------------------------------'
  */
   [_QWERTY] = LAYOUT_ortho_4x12(
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
     KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_INVQ,
     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
-    KC_LCTL,  KC_LGUI,  KC_LALT,  MO(4),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    TT(3),    KC_LALT,  KC_LGUI,  KC_LCTL
+    KC_LCTL,  KC_LGUI,  KC_LALT,  TT(3),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    XXXXXXX,  KC_LALT,  KC_LGUI,  KC_LCTL
   ),
 /* Number
  * ,-----------------------------------------------------------------------------------.
- * | Qwer |  F1  |  F2  |  F3  |  F4  |      |      |   7  |   8  |   9  |   P  | Bksp |
+ * | Qwer |  F1  |  F2  |  F3  |  F4  |      |      |   7  |   8  |   9  |   =  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |  F5  |  F6  |  F7  |  F8  |      |   *  |   4  |   5  |   6  |   +  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -114,17 +113,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  KC_QUES,  KC_SLASH, KC_ASTR,  KC_GRV,   KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_AT,    XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
-  [_NAV] = LAYOUT_ortho_4x12(
-    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
-  ),
   [_DEV] = LAYOUT_ortho_4x12(
-    DV_TRM,   DV_NTRM,  DV_CTRM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    DV_BLD,   DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  KC_F5,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  DV_GIMP,  XXXXXXX,  DV_UNCOM, DV_COMM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
+    DV_BLD,   DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  KC_F5,    LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_UNCOM, DV_COMM,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
     AS_RPT,   RGB_TOG,  RGB_VAI,  RGB_HUI,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BTN1,  KC_WH_U,  KC_WH_D,  XXXXXXX,  TO(6),

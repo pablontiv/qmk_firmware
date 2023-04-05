@@ -41,14 +41,17 @@ enum layer_names {
 #define DV_SOVR KC_F10 // VS Step Over
 #define DV_GIMP C(KC_F12) // VS Go to Implementation
 #define DV_NXER C(S(KC_F12)) // Next error
+#define DV_COMA
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
-  DV_COMM, // Comment line
-  DV_UNCOM, // Uncomment line
+  DV_CMNT, // Comment line
+  DV_UNCMT, // Uncomment line
   DV_MKDC, // Markdown code
   DV_HTMC, // Html closing 
   KC_INVQ, // Inverted quote
+  DV_COMM,
+  DV_SCLN,
 };
 
 enum combo_events {
@@ -76,8 +79,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_QWERTY] = LAYOUT_ortho_4x12(
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
-    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_INVQ,
-    KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
+    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     DV_SCLN,  KC_INVQ,
+    KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     DV_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
     KC_LCTL,  KC_LGUI,  KC_LALT,  TT(3),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    XXXXXXX,  KC_LALT,  KC_LGUI,  KC_LCTL
   ),
 /* Number
@@ -117,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DEV] = LAYOUT_ortho_4x12(
     TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
     DV_BLD,   DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  KC_F5,    LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
-    XXXXXXX,  DV_GIMP,  DV_NXER,  DV_UNCOM, DV_COMM,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
+    XXXXXXX,  DV_GIMP,  DV_NXER,  DV_UNCMT, DV_CMNT,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
@@ -140,10 +143,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case DV_ARR:
         SEND_STRING("=>");
         break;
-      case DV_COMM:
+      case DV_CMNT:
         SEND_STRING(SS_DOWN(X_LCTL) "kc" SS_UP(X_LCTL));
         break;
-      case DV_UNCOM:
+      case DV_UNCMT:
         SEND_STRING(SS_DOWN(X_LCTL) "ku" SS_UP(X_LCTL));
         break;
       case DV_MKDC:
@@ -151,6 +154,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
       case DV_HTMC:
         SEND_STRING("/>");
+        break;
+      case DV_COMM:
+        SEND_STRING(", ");
+        break;
+      case DV_SCLN:
+        SEND_STRING(";\n");
         break;
     }
   }

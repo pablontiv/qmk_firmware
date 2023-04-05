@@ -48,6 +48,7 @@ enum custom_keycodes {
   DV_UNCOM, // Uncomment line
   DV_MKDC, // Markdown code
   DV_HTMC, // Html closing 
+  KC_INVQ, // Inverted quote
 };
 
 enum combo_events {
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_QWERTY] = LAYOUT_ortho_4x12(
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
-    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,
+    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_INVQ,
     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
     KC_LCTL,  KC_LGUI,  KC_LALT,  MO(4),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    TT(3),    KC_LALT,  KC_LGUI,  KC_LCTL
   ),
@@ -189,6 +190,7 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
     case KC_DOT:
     case KC_SLSH:
+    case KC_INVQ:
       return true;
     default:
       return false;
@@ -205,6 +207,13 @@ void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
         break;
       case KC_SLSH:
         register_code16((!shifted) ? KC_SLSH : KC_BSLS);
+        break;
+      case KC_INVQ:
+        if (shifted) {
+          SEND_STRING("'");
+        } else {
+          SEND_STRING("\"");
+        }
         break;
       default:
         if (shifted) {
@@ -225,6 +234,8 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
       break;
     case KC_SLSH:
       unregister_code16((!shifted) ? KC_SLSH : KC_BSLS);
+      break;
+    case KC_INVQ:
       break;
     default:
       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift

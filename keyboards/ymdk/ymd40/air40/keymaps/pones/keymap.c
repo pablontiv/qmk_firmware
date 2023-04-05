@@ -41,29 +41,13 @@ enum layer_names {
 #define DV_SIN KC_F11 // VS Step Into
 #define DV_SOVR KC_F10 // VS Step Over
 #define DV_GIMP C(KC_F12) // VS Go to Implementation
-#define SY_EXCL S(KC_1) // Exclamation mark
-#define SY_ARB S(KC_2) // Arobase
-#define SY_NUM S(KC_3) // Number
-#define SY_CRCY S(KC_4) // Currency
-#define SY_PERC S(KC_5) // Percent
-#define SY_CRT S(KC_6) // Caret
-#define SY_AMP S(KC_7) // Ampersand
-#define SY_ASTK S(KC_8) // Asterisk
-#define SY_QSTN S(KC_SLASH) // Question mark
-#define SY_LPRN S(KC_9) // Left parenthesis
-#define SY_RPRN S(KC_0) // Right parenthesis
-#define SY_UND S(KC_MINUS) // Underscore
-#define SY_PLS S(KC_EQUAL) // Plus
-#define SY_LCRY S(KC_LBRC) // Left curly braces
-#define SY_RCRY S(KC_RBRC) // Right curly braces
-#define SY_PIP S(KC_BSLS) // Pipe
-#define SY_GRT S(KC_DOT) // Greater than
-#define SY_LST S(KC_COMMA) // Less than
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
   DV_COMM, // Comment line
-  DV_UNCOM // Uncomment line
+  DV_UNCOM, // Uncomment line
+  DV_MKDC, // Markdown code
+  DV_HTMC, // Html closing 
 };
 
 enum combo_events {
@@ -95,17 +79,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
     KC_LCTL,  KC_LGUI,  KC_LALT,  MO(4),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    TT(3),    KC_LALT,  KC_LGUI,  KC_LCTL
   ),
+/* Number
+ * ,-----------------------------------------------------------------------------------.
+ * | Qwer |  F1  |  F2  |  F3  |  F4  |      |      |   7  |   8  |   9  |   P  | Bksp |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |  F5  |  F6  |  F7  |  F8  |      |   *  |   4  |   5  |   6  |   +  |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |  F9  |  F10 |  F11 |  F12 |      |   /  |   1  |   2  |   3  |   -  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |             |   0  |   0  |   .  |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
   [_NUMBER] = LAYOUT_ortho_4x12(
     TO(0),    KC_F1,    KC_F2,    KC_F3,    KC_F4,    XXXXXXX,  XXXXXXX,  KC_7,     KC_8,     KC_9,     KC_EQUAL, KC_BSPC,
-    XXXXXXX,  KC_F5,    KC_F6,    KC_F7,    KC_F8,    XXXXXXX,  SY_ASTK,  KC_4,     KC_5,     KC_6,     SY_PLS,   XXXXXXX,
+    XXXXXXX,  KC_F5,    KC_F6,    KC_F7,    KC_F8,    XXXXXXX,  KC_ASTR,  KC_4,     KC_5,     KC_6,     KC_PLUS,  XXXXXXX,
     XXXXXXX,  KC_F9,    KC_F10,   KC_F11,   KC_F12,   XXXXXXX,  KC_SLASH, KC_1,     KC_2,     KC_3,     KC_MINUS, KC_ENT,
     KC_WAKE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_0,     KC_0,     KC_DOT,   XXXXXXX,  XXXXXXX
   ),
+/* Symbol
+ * ,-----------------------------------------------------------------------------------.
+ * |      |  ``` |   <  |   >  |  />  |      |      |  =>  |   [  |   ]  |   %  |  Del |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |   !  |   -  |   +  |   =  |   ~  |   &  |   :  |   (  |   )  |   #  |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |   ?  |   \  |   *  |   /  |   ^  |   |  |   $  |   {  |   }  |   @  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |    Space    |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
   [_SYMBOL] = LAYOUT_ortho_4x12(
-    KC_GRV,   SY_EXCL,  SY_ARB,  SY_NUM,    SY_CRCY,  SY_PERC,  XXXXXXX,  DV_ARR,   XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_DEL,
-    XXXXXXX,  SY_QSTN,  XXXXXXX,  KC_MINUS, KC_EQUAL, SY_ASTK,  SY_LST,   SY_LPRN,  SY_LCRY,  KC_LBRC,  KC_SLASH, SY_AMP,
-    XXXXXXX,  SY_CRT,   XXXXXXX,  SY_UND,   SY_PLS,   KC_SLASH, SY_GRT,   SY_RPRN,  SY_RCRY,  KC_RBRC,  KC_BSLS,  SY_PIP,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    XXXXXXX,  DV_MKDC,  KC_LT,    KC_GT,    DV_HTMC,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  KC_PERC,  KC_DEL,
+    XXXXXXX,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_COLN,  KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
+    XXXXXXX,  KC_QUES,  KC_BSLS,  KC_ASTR,  KC_SLASH, KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_AT,    XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_NAV] = LAYOUT_ortho_4x12(
     TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
@@ -145,6 +151,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case DV_UNCOM:
         SEND_STRING(SS_DOWN(X_LCTL) "ku" SS_UP(X_LCTL));
         break;
+      case DV_MKDC:
+        SEND_STRING("``` ");
+        break;
+      case DV_HTMC:
+        SEND_STRING("/>");
+        break;
     }
   }
 
@@ -170,5 +182,54 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       TAP(S(KC_HOME));
       TAP(KC_BSPC);
       break;
+  }
+}
+
+bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
+  switch(keycode) {
+    case KC_DOT:
+    case KC_SLSH:
+      return true;
+    default:
+      return false;
+  }
+}
+
+void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+    switch(keycode) {
+      case KC_DOT:
+        register_code16((!shifted) ? KC_DOT : KC_MINUS);
+        break;
+      case KC_COMM:
+        register_code16((!shifted) ? KC_COMM : KC_UNDS);
+        break;
+      case KC_SLSH:
+        register_code16((!shifted) ? KC_SLSH : KC_BSLS);
+        break;
+      default:
+        if (shifted) {
+          add_weak_mods(MOD_BIT(KC_LSFT));
+        }
+        // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+        register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+      }
+}
+
+void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+  switch(keycode) {
+    case KC_DOT:
+      unregister_code16((!shifted) ? KC_DOT : KC_MINUS);
+      break;
+    case KC_COMM:
+      unregister_code16((!shifted) ? KC_COMM : KC_UNDS);
+      break;
+    case KC_SLSH:
+      unregister_code16((!shifted) ? KC_SLSH : KC_BSLS);
+      break;
+    default:
+      // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+      // The IS_RETRO check isn't really necessary here, always using
+      // keycode & 0xFF would be fine.
+      unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
   }
 }

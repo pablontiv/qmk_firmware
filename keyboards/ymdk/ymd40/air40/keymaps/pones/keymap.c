@@ -40,6 +40,7 @@ enum layer_names {
 #define DV_SIN KC_F11 // VS Step Into
 #define DV_SOVR KC_F10 // VS Step Over
 #define DV_GIMP C(KC_F12) // VS Go to Implementation
+#define DV_NXER C(S(KC_F12)) // Next error
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
@@ -116,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DEV] = LAYOUT_ortho_4x12(
     TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
     DV_BLD,   DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  KC_F5,    LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_UNCOM, DV_COMM,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
+    XXXXXXX,  DV_GIMP,  DV_NXER,  DV_UNCOM, DV_COMM,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_TESTS] = LAYOUT_ortho_4x12(

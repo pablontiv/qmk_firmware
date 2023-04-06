@@ -47,11 +47,7 @@ enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
   DV_CMNT, // Comment line
   DV_UNCMT, // Uncomment line
-  DV_MKDC, // Markdown code
-  DV_HTMC, // Html closing 
   KC_INVQ, // Inverted quote
-  DV_COMM,
-  DV_SCLN,
 };
 
 enum combo_events {
@@ -79,8 +75,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_QWERTY] = LAYOUT_ortho_4x12(
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
-    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     DV_SCLN,  KC_INVQ,
-    KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     DV_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
+    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_INVQ,
+    KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
     KC_LCTL,  KC_LGUI,  KC_LALT,  TT(3),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    XXXXXXX,  KC_LALT,  KC_LGUI,  KC_LCTL
   ),
 /* Number
@@ -112,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
   [_SYMBOL] = LAYOUT_ortho_4x12(
-    XXXXXXX,  DV_MKDC,  KC_LT,    KC_GT,    DV_HTMC,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  KC_PERC,  KC_DEL,
+    XXXXXXX,  KC_GRV,   KC_LT,    KC_GT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  KC_PERC,  KC_DEL,
     XXXXXXX,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_COLN,  KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
     XXXXXXX,  KC_QUES,  KC_SLASH, KC_ASTR,  KC_GRV,   KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_AT,    XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
@@ -140,26 +136,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
-      case DV_ARR:
-        SEND_STRING("=>");
-        break;
       case DV_CMNT:
         SEND_STRING(SS_DOWN(X_LCTL) "kc" SS_UP(X_LCTL));
         break;
       case DV_UNCMT:
         SEND_STRING(SS_DOWN(X_LCTL) "ku" SS_UP(X_LCTL));
-        break;
-      case DV_MKDC:
-        SEND_STRING("``` ");
-        break;
-      case DV_HTMC:
-        SEND_STRING("/>");
-        break;
-      case DV_COMM:
-        SEND_STRING(", ");
-        break;
-      case DV_SCLN:
-        SEND_STRING(";\n");
         break;
     }
   }
@@ -191,9 +172,8 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 
 bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
-    case KC_DOT:
-    case KC_SLSH:
     case KC_INVQ:
+    case DV_ARR:
       return true;
     default:
       return false;
@@ -201,30 +181,35 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
 }
 
 void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-    switch(keycode) {
-      case KC_DOT:
-        register_code16((!shifted) ? KC_DOT : KC_MINUS);
-        break;
-      case KC_COMM:
-        register_code16((!shifted) ? KC_COMM : KC_UNDS);
-        break;
-      case KC_SLSH:
-        register_code16((!shifted) ? KC_SLSH : KC_BSLS);
-        break;
-      case KC_INVQ:
-        if (shifted) {
-          SEND_STRING("'");
-        } else {
-          SEND_STRING("\"");
-        }
-        break;
-      default:
-        if (shifted) {
-          add_weak_mods(MOD_BIT(KC_LSFT));
-        }
-        // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-        register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+  switch(keycode) {
+    case KC_DOT:
+      register_code16((!shifted) ? KC_DOT : KC_UNDS);
+      break;
+    case KC_SLSH:
+      register_code16((!shifted) ? KC_SLSH : KC_BSLS);
+      break;
+    case KC_COMM:
+      (shifted) ? SEND_STRING("-") : SEND_STRING(", ");
+      break;
+    case KC_SCLN:
+      (shifted) ? SEND_STRING(":") : SEND_STRING(";\n");
+      break;
+    case KC_INVQ:
+      (shifted) ? SEND_STRING("'") : SEND_STRING("\"");
+      break;
+    case DV_ARR:
+      (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
+      break;
+    case KC_GRV:
+      (shifted) ? SEND_STRING("``` ") : SEND_STRING("`");
+      break;
+    default:
+      if (shifted) {
+        add_weak_mods(MOD_BIT(KC_LSFT));
       }
+      // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+      register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+    }
 }
 
 void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
@@ -232,13 +217,14 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
     case KC_DOT:
       unregister_code16((!shifted) ? KC_DOT : KC_MINUS);
       break;
-    case KC_COMM:
-      unregister_code16((!shifted) ? KC_COMM : KC_UNDS);
-      break;
     case KC_SLSH:
       unregister_code16((!shifted) ? KC_SLSH : KC_BSLS);
       break;
     case KC_INVQ:
+    case KC_COMM:
+    case KC_SCLN:
+    case DV_ARR:
+    case KC_GRV:
       break;
     default:
       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift

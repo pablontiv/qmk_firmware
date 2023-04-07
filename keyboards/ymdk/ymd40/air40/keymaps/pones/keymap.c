@@ -29,7 +29,6 @@ enum layer_names {
 #define WI_CLO A(KC_F4) // Close window
 
 // Shorthand macros and keycodes
-#define TAP(x) tap_code16(x)
 #define SPC_TE LT(4,KC_SPC) // Space on tap Test layer on hold
 #define DV_TRM C(KC_GRV) // VS Code terminal
 #define DV_NTRM C(S(KC_GRV)) // VS Code new terminal
@@ -163,9 +162,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       SEND_STRING("pablo.ontiveros@gmail.com");
       break;
     case BSPC_LSFT_CLEAR:
-      TAP(KC_END);
-      TAP(S(KC_HOME));
-      TAP(KC_BSPC);
+      tap_code16(KC_END);
+      tap_code16(S(KC_HOME));
+      tap_code16(KC_BSPC);
       break;
   }
 }
@@ -183,25 +182,22 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
 void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
   switch(keycode) {
     case KC_DOT:
-      register_code16((!shifted) ? KC_DOT : KC_UNDS);
+      (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_DOT);
       break;
     case KC_SLSH:
-      register_code16((!shifted) ? KC_SLSH : KC_BSLS);
+      (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
       break;
     case KC_COMM:
-      (shifted) ? SEND_STRING("-") : SEND_STRING(", ");
-      break;
-    case KC_SCLN:
-      (shifted) ? SEND_STRING(":") : SEND_STRING(";\n");
+      (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
       break;
     case KC_INVQ:
-      (shifted) ? SEND_STRING("'") : SEND_STRING("\"");
+      (shifted) ? tap_code16(KC_QUOT) : tap_code16(KC_DQT);
       break;
     case DV_ARR:
       (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
       break;
     case KC_GRV:
-      (shifted) ? SEND_STRING("``` ") : SEND_STRING("`");
+      (shifted) ? SEND_STRING("``` ") : tap_code16(KC_GRV);
       break;
     default:
       if (shifted) {
@@ -215,14 +211,9 @@ void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
 void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
   switch(keycode) {
     case KC_DOT:
-      unregister_code16((!shifted) ? KC_DOT : KC_MINUS);
-      break;
     case KC_SLSH:
-      unregister_code16((!shifted) ? KC_SLSH : KC_BSLS);
-      break;
     case KC_INVQ:
     case KC_COMM:
-    case KC_SCLN:
     case DV_ARR:
     case KC_GRV:
       break;

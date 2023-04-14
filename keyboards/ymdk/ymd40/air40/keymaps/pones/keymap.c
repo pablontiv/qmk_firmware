@@ -24,8 +24,6 @@ enum layer_names {
 #define CS_RGT C(S(KC_RIGHT)) // Select next word
 #define CS_UP C(S(KC_UP))
 #define CS_DWN C(S(KC_DOWN))
-#define WO_SDW S(KC_DOWN) // Select previous line
-#define WO_SUP S(KC_UP) // Select next line
 #define LN_UP A(KC_UP) // Move line up
 #define LN_DN A(KC_DOWN) // Move line down
 
@@ -45,7 +43,8 @@ enum layer_names {
 #define DV_SOVR KC_F10 // VS Step Over
 #define DV_GIMP C(KC_F12) // VS Go to Implementation
 #define DV_NXER C(S(KC_F12)) // Next error
-#define KC_CRSH C(KC_LSFT) // Control + Shift
+#define CS_P C(S(KC_P))
+#define CS_V C(S(KC_V))
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
@@ -54,17 +53,6 @@ enum custom_keycodes {
   DV_SELLN, 
   KC_INVQ, // Inverted quote
 };
-
-enum combo_events {
-  EM_EMAIL,
-  BSPC_LSFT_CLEAR,
-  COMBO_LENGTH
-};
-
-uint16_t COMBO_LEN = COMBO_LENGTH; 
-
-const uint16_t PROGMEM email_combo[] = {KC_E, KC_M, COMBO_END};
-const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Qwerty
@@ -119,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_DEV] = LAYOUT_ortho_4x12(
-    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  CS_V,     CS_P,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  DV_BLD,   XXXXXXX,  DV_CMNT,  LN_UP,    LN_DN,    DV_UNCMT, XXXXXXX,
     XXXXXXX,  DV_GIMP,  DV_NXER,  XXXXXXX,  XXXXXXX,  KC_F5,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
@@ -163,28 +151,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   return true;
 };
-
-combo_t key_combos[] = {
-  [EM_EMAIL] = COMBO_ACTION(email_combo),
-  [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo),
-};
-
-void process_combo_event(uint16_t combo_index, bool pressed) {
-  if (!pressed) {
-    return;
-  }
-
-  switch(combo_index) {
-    case EM_EMAIL:
-      SEND_STRING("pablo.ontiveros@gmail.com");
-      break;
-    case BSPC_LSFT_CLEAR:
-      tap_code16(KC_END);
-      tap_code16(S(KC_HOME));
-      tap_code16(KC_BSPC);
-      break;
-  }
-}
 
 bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {

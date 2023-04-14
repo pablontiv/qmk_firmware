@@ -16,10 +16,14 @@ enum layer_names {
 #define FZ_RGT G(KC_RIGHT) // Move window to next area
 
 // Word navigation and selection keycodes
-#define WO_LFT C(KC_LEFT) // Move to previous word
-#define WO_RGT C(KC_RIGHT) // Move to next word
-#define WO_SLF C(S(KC_LEFT)) // Select previous word
-#define WO_SRG C(S(KC_RIGHT)) // Select next word
+#define C_LFT C(KC_LEFT) // Move to previous word
+#define C_RGT C(KC_RIGHT) // Move to next word
+#define C_UP C(KC_UP)
+#define C_DWN C(KC_DOWN)
+#define CS_LFT C(S(KC_LEFT)) // Select previous word
+#define CS_RGT C(S(KC_RIGHT)) // Select next word
+#define CS_UP C(S(KC_UP))
+#define CS_DWN C(S(KC_DOWN))
 #define WO_SDW S(KC_DOWN) // Select previous line
 #define WO_SUP S(KC_UP) // Select next line
 #define LN_UP A(KC_UP) // Move line up
@@ -47,6 +51,7 @@ enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
   DV_CMNT, // Comment line
   DV_UNCMT, // Uncomment line
+  DV_SELLN, 
   KC_INVQ, // Inverted quote
 };
 
@@ -121,8 +126,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NAV] = LAYOUT_ortho_4x12(
     TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
+    XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
+    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  LN_DN,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
@@ -143,10 +148,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
       case DV_CMNT:
-        SEND_STRING(SS_DOWN(X_LCTL) "kc" SS_UP(X_LCTL));
+        SEND_STRING(SS_LCTL("kc"));
         break;
       case DV_UNCMT:
-        SEND_STRING(SS_DOWN(X_LCTL) "ku" SS_UP(X_LCTL));
+        SEND_STRING(SS_LCTL("ku"));
+        break;
+      case DV_SELLN:
+        tap_code16(KC_HOME);
+        tap_code16(KC_HOME);
+        tap_code16(S(KC_END));
         break;
     }
   }

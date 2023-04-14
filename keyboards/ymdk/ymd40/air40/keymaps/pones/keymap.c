@@ -5,6 +5,7 @@ enum layer_names {
   _NUMBER,
   _SYMBOL,
   _DEV,
+  _NAV, 
   _TESTS,
   _GAME
 };
@@ -29,7 +30,7 @@ enum layer_names {
 #define WI_CLO A(KC_F4) // Close window
 
 // Shorthand macros and keycodes
-#define SPC_TE LT(4,KC_SPC) // Space on tap Test layer on hold
+#define SPC_TE LT(_TESTS,KC_SPC) // Space on tap Test layer on hold
 #define DV_TRM C(KC_GRV) // VS Code terminal
 #define DV_NTRM C(S(KC_GRV)) // VS Code new terminal
 #define DV_CTRM C(KC_PGDN) // VS Code cycle terminal
@@ -40,7 +41,7 @@ enum layer_names {
 #define DV_SOVR KC_F10 // VS Step Over
 #define DV_GIMP C(KC_F12) // VS Go to Implementation
 #define DV_NXER C(S(KC_F12)) // Next error
-#define DV_COMA
+#define KC_CRSH C(KC_LSFT) // Control + Shift
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
@@ -76,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
     KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_INVQ,
     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
-    KC_LCTL,  KC_LGUI,  KC_LALT,  TT(3),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    XXXXXXX,  KC_LALT,  KC_LGUI,  KC_LCTL
+    KC_LCTL,  KC_LGUI,  KC_LALT,  TT(3),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    MO(4),    KC_LALT,  KC_LGUI,  KC_LCTL
   ),
 /* Number
  * ,-----------------------------------------------------------------------------------.
@@ -113,9 +114,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_DEV] = LAYOUT_ortho_4x12(
-    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
-    DV_BLD,   DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  KC_F5,    LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
-    XXXXXXX,  DV_GIMP,  DV_NXER,  DV_UNCMT, DV_CMNT,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
+    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    DV_BLD,   DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  KC_F5,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  DV_GIMP,  DV_NXER,  DV_UNCMT, DV_CMNT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+  ),
+  [_NAV] = LAYOUT_ortho_4x12(
+    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  LN_DN,    WO_LFT,   WO_SLF,   WO_SRG,   WO_RGT,   FZ_RGT,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_TESTS] = LAYOUT_ortho_4x12(

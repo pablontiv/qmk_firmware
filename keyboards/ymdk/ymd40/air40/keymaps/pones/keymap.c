@@ -14,6 +14,8 @@ enum layer_names {
 #define FZ_EXT G(S(KC_UP)) // Expand window vertically
 #define FZ_LFT G(KC_LEFT) // Move window to previous area
 #define FZ_RGT G(KC_RIGHT) // Move window to next area
+#define VD_NXT G(C(KC_LEFT)) // Move window to previous area
+#define VD_PRV G(C(KC_RIGHT)) // Move window to next area
 
 // Word navigation and selection keycodes
 #define C_LFT C(KC_LEFT) // Move to previous word
@@ -45,6 +47,8 @@ enum layer_names {
 #define DV_NXER C(S(KC_F12)) // Next error
 #define CS_P C(S(KC_P))
 #define CS_V C(S(KC_V))
+#define CS_F C(S(KC_F))
+#define CS_S C(S(KC_S))
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
@@ -107,15 +111,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_DEV] = LAYOUT_ortho_4x12(
-    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  CS_V,     CS_P,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CS_V,     CS_P,     CS_F,     CS_S,     XXXXXXX,
     XXXXXXX,  DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  DV_BLD,   XXXXXXX,  DV_CMNT,  LN_UP,    LN_DN,    DV_UNCMT, XXXXXXX,
     XXXXXXX,  DV_GIMP,  DV_NXER,  XXXXXXX,  XXXXXXX,  KC_F5,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_NAV] = LAYOUT_ortho_4x12(
-    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   FZ_EXT,
-    XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, LN_UP,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, FZ_LFT,
-    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  LN_DN,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  FZ_RGT,
+    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   XXXXXXX,
+    XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, XXXXXXX,  KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, XXXXXXX,
+    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  FZ_EXT,   FZ_LFT,   VD_NXT,   VD_PRV,   FZ_RGT,   XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_TESTS] = LAYOUT_ortho_4x12(
@@ -206,4 +210,30 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
       // keycode & 0xFF would be fine.
       unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
   }
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+
+  switch(get_highest_layer(layer_state|default_layer_state)) {
+    case 1:
+      rgb_matrix_set_color(led_min, RGB_RED);
+      break;
+    case 2:
+      rgb_matrix_set_color(led_min, RGB_GREEN);
+      break;
+    case 3:
+      rgb_matrix_set_color(led_min, RGB_BLUE);
+      break;
+    case 4:
+      rgb_matrix_set_color(led_min, RGB_YELLOW);
+      break;
+    case 5:
+      rgb_matrix_set_color(led_min, RGB_PURPLE);
+      break;
+    case 6:
+      rgb_matrix_set_color(led_min, RGB_WHITE);
+      break;
+  }
+
+  return false;
 }

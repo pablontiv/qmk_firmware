@@ -6,7 +6,7 @@ enum layer_names {
   _SYMBOL,
   _DEV,
   _NAV, 
-  _TESTS,
+  _UTIL,
   _GAME
 };
 
@@ -34,7 +34,7 @@ enum layer_names {
 #define WI_CLO A(KC_F4) // Close window
 
 // Shorthand macros and keycodes
-#define SPC_TE LT(_TESTS,KC_SPC) // Space on tap Test layer on hold
+#define SPC_TE LT(_UTIL,KC_SPC) // Space on tap Test layer on hold
 #define DV_TRM C(KC_GRV) // VS Code terminal
 #define DV_NTRM C(S(KC_GRV)) // VS Code new terminal
 #define DV_CTRM C(KC_PGDN) // VS Code cycle terminal
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(0),    KC_F1,    KC_F2,    KC_F3,    KC_F4,    XXXXXXX,  XXXXXXX,  KC_7,     KC_8,     KC_9,     KC_EQUAL, KC_BSPC,
     XXXXXXX,  KC_F5,    KC_F6,    KC_F7,    KC_F8,    XXXXXXX,  KC_ASTR,  KC_4,     KC_5,     KC_6,     KC_PLUS,  XXXXXXX,
     XXXXXXX,  KC_F9,    KC_F10,   KC_F11,   KC_F12,   XXXXXXX,  KC_SLASH, KC_1,     KC_2,     KC_3,     KC_MINUS, KC_ENT,
-    KC_WAKE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_0,     KC_0,     KC_DOT,   XXXXXXX,  XXXXXXX
+    KC_WAKE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  KC_0,     KC_0,     KC_DOT,   XXXXXXX,  XXXXXXX
   ),
 /* Symbol
  * ,-----------------------------------------------------------------------------------.
@@ -108,25 +108,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  KC_GRV,   KC_LT,    KC_GT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  KC_PERC,  KC_DEL,
     XXXXXXX,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_COLN,  KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
     XXXXXXX,  KC_QUES,  KC_SLASH, KC_ASTR,  KC_GRV,   KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_AT,    XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_DEV] = LAYOUT_ortho_4x12(
     TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CS_V,     CS_P,     CS_F,     CS_S,     XXXXXXX,
     XXXXXXX,  DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  DV_BLD,   XXXXXXX,  DV_CMNT,  LN_UP,    LN_DN,    DV_UNCMT, XXXXXXX,
     XXXXXXX,  DV_GIMP,  DV_NXER,  XXXXXXX,  XXXXXXX,  KC_F5,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_NAV] = LAYOUT_ortho_4x12(
-    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   XXXXXXX,
+    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   XXXXXXX,
     XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, XXXXXXX,  KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, XXXXXXX,
-    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  FZ_EXT,   FZ_LFT,   VD_NXT,   VD_PRV,   FZ_RGT,   XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SPC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
-  [_TESTS] = LAYOUT_ortho_4x12(
-    AS_RPT,   RGB_TOG,  RGB_VAI,  RGB_HUI,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BTN1,  KC_WH_U,  KC_WH_D,  XXXXXXX,  TO(6),
-    AS_UP,    RGB_MOD,  RGB_VAD,  RGB_HUD,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_MS_L,  KC_MS_U,  KC_MS_D,  KC_MS_R,  XXXXXXX,
-    AS_DOWN,  RGB_RMOD, RGB_SPI,  RGB_SAI,  XXXXXXX,  XXXXXXX,  KC_MPLY,  KC_MPRV,  KC_VOLU,  KC_VOLD,  KC_MNXT,  XXXXXXX,
-    AS_TOGG,  XXXXXXX,  RGB_SPD,  RGB_SAD,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+  [_UTIL] = LAYOUT_ortho_4x12(
+    AS_RPT,   XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(6),
+    AS_UP,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  FZ_EXT,   FZ_LFT,   VD_NXT,   VD_PRV,   FZ_RGT,   XXXXXXX,
+    AS_DOWN,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_MPLY,  KC_MPRV,  KC_VOLU,  KC_VOLD,  KC_MNXT,  XXXXXXX,
+    AS_TOGG,  XXXXXXX,  XXXXXXX,  KC_LGUI,  KC_LALT,  XXXXXXX,  XXXXXXX,  KC_LCTL,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_GAME] = LAYOUT_ortho_4x12(
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     TO(0),
@@ -212,28 +212,28 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
   }
 }
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+// bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
-  switch(get_highest_layer(layer_state|default_layer_state)) {
-    case 1:
-      rgb_matrix_set_color(led_min, RGB_RED);
-      break;
-    case 2:
-      rgb_matrix_set_color(led_min, RGB_GREEN);
-      break;
-    case 3:
-      rgb_matrix_set_color(led_min, RGB_BLUE);
-      break;
-    case 4:
-      rgb_matrix_set_color(led_min, RGB_YELLOW);
-      break;
-    case 5:
-      rgb_matrix_set_color(led_min, RGB_PURPLE);
-      break;
-    case 6:
-      rgb_matrix_set_color(led_min, RGB_WHITE);
-      break;
-  }
+//   switch(get_highest_layer(layer_state|default_layer_state)) {
+//     case 1:
+//       rgb_matrix_set_color(led_min, RGB_RED);
+//       break;
+//     case 2:
+//       rgb_matrix_set_color(led_min, RGB_GREEN);
+//       break;
+//     case 3:
+//       rgb_matrix_set_color(led_min, RGB_BLUE);
+//       break;
+//     case 4:
+//       rgb_matrix_set_color(led_min, RGB_YELLOW);
+//       break;
+//     case 5:
+//       rgb_matrix_set_color(led_min, RGB_PURPLE);
+//       break;
+//     case 6:
+//       rgb_matrix_set_color(led_min, RGB_WHITE);
+//       break;
+//   }
 
-  return false;
-}
+//   return false;
+// }

@@ -54,8 +54,9 @@ enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
   DV_CMNT, // Comment line
   DV_UNCMT, // Uncomment line
-  DV_SELLN, 
+  DV_SELLN, // Select line
   KC_INVQ, // Inverted quote
+  DV_REFS,  // Find references
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -113,13 +114,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DEV] = LAYOUT_ortho_4x12(
     TO(0),    DV_TRM,   DV_NTRM,  DV_CTRM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CS_V,     CS_P,     CS_F,     CS_S,     XXXXXXX,
     XXXXXXX,  DV_BRKP,  DV_SOUT,  DV_SIN,   DV_SOVR,  DV_BLD,   LN_UP,    DV_CMNT,  DV_UNCMT, XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  DV_GIMP,  DV_NXER,  XXXXXXX,  XXXXXXX,  KC_F5,    LN_DN,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_REFS,  DV_GIMP,  KC_F5,    LN_DN,    DV_NXER,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_NAV] = LAYOUT_ortho_4x12(
     TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   XXXXXXX,
-    XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, XXXXXXX,  KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, XXXXXXX,
-    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, XXXXXXX,
+    XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_UTIL] = LAYOUT_ortho_4x12(
@@ -144,6 +145,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
       case DV_UNCMT:
         SEND_STRING(SS_LCTL("ku"));
+        break;
+      case DV_REFS:
+        SEND_STRING(SS_LCTL("kr"));
         break;
       case DV_SELLN:
         tap_code16(KC_HOME);

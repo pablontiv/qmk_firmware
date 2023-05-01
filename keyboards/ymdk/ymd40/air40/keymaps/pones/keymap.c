@@ -95,19 +95,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 /* Symbol
  * ,-----------------------------------------------------------------------------------.
- * |      |  ``` |   <  |   >  |  />  |      |      |  =>  |   [  |   ]  |   %  |  Del |
+ * |      |   `  |   <  |   >  |      |      |      |  =>  |   [  |   ]  |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   !  |   -  |   +  |   =  |   ~  |   &  |   :  |   (  |   )  |   #  |      |
+ * |      |   ?  |   -  |   +  |   =  |   ~  |   &  |   @  |   (  |   )  |   #  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |   ?  |   /  |   *  |   `  |   ^  |   |  |   $  |   {  |   }  |   @  |      |
+ * |      |   !  |   /  |   *  |      |   ^  |   |  |   $  |   {  |   }  |   %  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |    Space    |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
   [_SYMBOL] = LAYOUT_ortho_4x12(
-    XXXXXXX,  KC_GRV,   KC_LT,    KC_GT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  KC_PERC,  KC_DEL,
-    XXXXXXX,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_COLN,  KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
-    XXXXXXX,  KC_QUES,  KC_SLASH, KC_ASTR,  KC_GRV,   KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_AT,    XXXXXXX,
+    XXXXXXX,  KC_GRV,   KC_LT,    KC_GT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  XXXXXXX,  KC_DEL,
+    XXXXXXX,  KC_QUES,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_AT,    KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
+    XXXXXXX,  KC_EXLM,  KC_SLASH, KC_ASTR,  XXXXXXX,  KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_PERC,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_DEV] = LAYOUT_ortho_4x12(

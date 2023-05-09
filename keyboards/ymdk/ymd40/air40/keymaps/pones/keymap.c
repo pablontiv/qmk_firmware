@@ -20,12 +20,14 @@ enum layer_names {
 // Word navigation and selection keycodes
 #define C_LFT C(KC_LEFT) // Move to previous word
 #define C_RGT C(KC_RIGHT) // Move to next word
-#define C_UP C(KC_UP)
-#define C_DWN C(KC_DOWN)
+#define C_UP C(KC_HOME)
+#define C_DWN C(KC_END)
 #define CS_LFT C(S(KC_LEFT)) // Select previous word
 #define CS_RGT C(S(KC_RIGHT)) // Select next word
 #define CS_UP C(S(KC_UP))
 #define CS_DWN C(S(KC_DOWN))
+#define S_PGUP S(KC_PGUP)
+#define S_PGDW S(KC_PGDN)
 #define LN_UP A(KC_UP) // Move line up
 #define LN_DN A(KC_DOWN) // Move line down
 
@@ -57,6 +59,7 @@ enum custom_keycodes {
   DV_SELLN, // Select line
   KC_INVQ, // Inverted quote
   DV_REFS,  // Find references
+  WI_MAX,  // Maximize window
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -118,13 +121,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_NAV] = LAYOUT_ortho_4x12(
-    TO(0),    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   XXXXXXX,
+    TO(0),    XXXXXXX,  S_PGUP,   S_PGDW,   XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   XXXXXXX,
     XXXXXXX,  C_LFT,    C_UP,     C_DWN,    C_RGT,    XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, XXXXXXX,
-    XXXXXXX,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    KC_LSFT,  CS_LFT,   CS_UP,    CS_DWN,   CS_RGT,   DV_SELLN, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    KC_LCTL,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_UTIL] = LAYOUT_ortho_4x12(
-    AS_RPT,   XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(6),
+    AS_RPT,   XXXXXXX,  XXXXXXX,  XXXXXXX,  WD_CLO,   WI_CLO,   XXXXXXX,  WI_MAX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(6),
     AS_UP,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  FZ_EXT,   FZ_LFT,   VD_NXT,   VD_PRV,   FZ_RGT,   XXXXXXX,
     AS_DOWN,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_MPLY,  KC_MPRV,  KC_VOLU,  KC_VOLD,  KC_MNXT,  XXXXXXX,
     AS_TOGG,  XXXXXXX,  XXXXXXX,  KC_LGUI,  KC_LALT,  XXXXXXX,  XXXXXXX,  KC_LCTL,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
@@ -153,6 +156,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code16(KC_HOME);
         tap_code16(KC_HOME);
         tap_code16(S(KC_END));
+        break;
+      case WI_MAX:
+        tap_code16(A(KC_SPC));
+        tap_code16(S(KC_X));
         break;
     }
   }

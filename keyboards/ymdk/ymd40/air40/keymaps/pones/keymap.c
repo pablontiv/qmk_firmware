@@ -57,7 +57,6 @@ enum custom_keycodes {
   DV_CMNT, // Comment line
   DV_UNCMT, // Uncomment line
   DV_SELLN, // Select line
-  KC_INVQ, // Inverted quote
   DV_REFS,  // Find references
   WI_MAX,  // Maximize window
 };
@@ -76,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_QWERTY] = LAYOUT_ortho_4x12(
     QK_GESC,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
-    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_INVQ,
+    KC_TAB,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,
     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SC_SENT,
     KC_LCTL,  KC_LGUI,  KC_LALT,  TT(3),    TT(1),    SPC_TE,   KC_SPC,   MO(2),    MO(4),    KC_LALT,  KC_LGUI,  KC_LCTL
   ),
@@ -101,17 +100,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |   `  |   <  |   >  |      |      |      |  =>  |   [  |   ]  |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   ?  |   -  |   +  |   =  |   ~  |   &  |   @  |   (  |   )  |   #  |      |
+ * |      |   !  |   -  |   +  |   =  |   ~  |   &  |   @  |   (  |   )  |   #  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |   !  |   /  |   *  |      |   ^  |   |  |   $  |   {  |   }  |   %  |      |
+ * |      |   ?  |   /  |   *  |      |   ^  |   |  |   $  |   {  |   }  |   %  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |    Space    |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
   [_SYMBOL] = LAYOUT_ortho_4x12(
     XXXXXXX,  KC_GRV,   KC_LT,    KC_GT,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_ARR,   KC_LBRC,  KC_RBRC,  XXXXXXX,  KC_DEL,
-    XXXXXXX,  KC_QUES,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_AT,    KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
-    XXXXXXX,  KC_EXLM,  KC_SLASH, KC_ASTR,  XXXXXXX,  KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_PERC,  XXXXXXX,
+    XXXXXXX,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_TILDE, KC_AMPR,  KC_AT,    KC_LPRN,  KC_RPRN,  KC_HASH,  XXXXXXX,
+    XXXXXXX,  KC_QUES,  KC_SLASH, KC_ASTR,  XXXXXXX,  KC_CIRC,  KC_PIPE,  KC_DLR,   KC_LCBR,  KC_RCBR,  KC_PERC,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  SPC_TE,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
   [_DEV] = LAYOUT_ortho_4x12(
@@ -169,7 +168,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
-    case KC_INVQ:
     case DV_ARR:
       return true;
     default:
@@ -187,9 +185,6 @@ void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
       break;
     case KC_COMM:
       (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
-      break;
-    case KC_INVQ:
-      (shifted) ? tap_code16(KC_QUOT) : tap_code16(KC_DQT);
       break;
     case DV_ARR:
       (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
@@ -210,7 +205,6 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
   switch(keycode) {
     case KC_DOT:
     case KC_SLSH:
-    case KC_INVQ:
     case KC_COMM:
     case DV_ARR:
     case KC_GRV:

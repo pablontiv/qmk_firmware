@@ -61,6 +61,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CS_F C(S(KC_F))
 #define CS_S C(S(KC_S))
 
+// Left-hand home row mods
+#define HOME_A LGUI_T(KC_A)
+#define HOME_S LALT_T(KC_S)
+#define HOME_D LCTL_T(KC_D)
+#define HOME_F LSFT_T(KC_F)
+
+// Right-hand home row mods
+#define HOME_J RSFT_T(KC_J)
+#define HOME_K RCTL_T(KC_K)
+#define HOME_L LALT_T(KC_L)
+#define HOME_SCLN RGUI_T(KC_SCLN)
+
 enum layer_names {
   _QWERTY,
   _NUMBER,
@@ -86,9 +98,9 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+       KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+      KC_LCTL,  HOME_A,  HOME_S,  HOME_D,  HOME_F,    KC_G,                         KC_H,  HOME_J,  HOME_K,  HOME_L,HOME_SCLN,KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LGUI,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -173,56 +185,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 };
 
-bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
-  switch(keycode) {
-    case DV_ARR:
-      return true;
-    default:
-      return false;
-  }
-}
+// bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
+//   switch(keycode) {
+//     case DV_ARR:
+//       return true;
+//     default:
+//       return false;
+//   }
+// }
 
-void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-  switch(keycode) {
-    case KC_DOT:
-      (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_DOT);
-      break;
-    case KC_SLSH:
-      (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
-      break;
-    case KC_COMM:
-      (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
-      break;
-    case DV_ARR:
-      (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
-      break;
-    case KC_GRV:
-      (shifted) ? SEND_STRING("``` ") : tap_code16(KC_GRV);
-      break;
-    default:
-      if (shifted) {
-        add_weak_mods(MOD_BIT(KC_LSFT));
-      }
-      // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-      register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
-    }
-}
+// void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+//   switch(keycode) {
+//     case KC_DOT:
+//       (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_DOT);
+//       break;
+//     case KC_SLSH:
+//       (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
+//       break;
+//     case KC_COMM:
+//       (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
+//       break;
+//     case DV_ARR:
+//       (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
+//       break;
+//     case KC_GRV:
+//       (shifted) ? SEND_STRING("``` ") : tap_code16(KC_GRV);
+//       break;
+//     default:
+//       if (shifted) {
+//         add_weak_mods(MOD_BIT(KC_LSFT));
+//       }
+//       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+//       register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+//     }
+// }
 
-void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-  switch(keycode) {
-    case KC_DOT:
-    case KC_SLSH:
-    case KC_COMM:
-    case DV_ARR:
-    case KC_GRV:
-      break;
-    default:
-      // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-      // The IS_RETRO check isn't really necessary here, always using
-      // keycode & 0xFF would be fine.
-      unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
-  }
-}
+// void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+//   switch(keycode) {
+//     case KC_DOT:
+//     case KC_SLSH:
+//     case KC_COMM:
+//     case DV_ARR:
+//     case KC_GRV:
+//       break;
+//     default:
+//       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+//       // The IS_RETRO check isn't really necessary here, always using
+//       // keycode & 0xFF would be fine.
+//       unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+//   }
+// }
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }

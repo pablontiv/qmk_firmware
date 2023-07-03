@@ -126,9 +126,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_DEV] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,  DV_TRM, DV_NTRM, DV_CTRM, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX,  DV_TRM, DV_NTRM, DV_CTRM, DV_CMNT,DV_UNCMT,                      C(KC_Y), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, DV_BRKP, DV_SOUT,  DV_SIN, DV_SOVR,  DV_BLD,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, DV_BRKP, DV_SOUT,  DV_SIN, DV_SOVR,  DV_BLD,                   C(S(KC_V)),C(KC_F),C(S(KC_F)),C(KC_H), C(KC_S), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, DV_NXER, XXXXXXX, DV_REFS, DV_IMPL,   KC_F5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -152,13 +152,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,  KC_GRV,   KC_LT,   KC_GT, XXXXXXX, XXXXXXX,                      XXXXXXX,  DV_ARR, KC_LBRC, KC_RBRC, KC_HASH, XXXXXXX,
+      XXXXXXX,  KC_GRV,   KC_LT,   KC_GT, XXXXXXX, XXXXXXX,                      KC_DLR,  DV_ARR, KC_LBRC, KC_RBRC, KC_HASH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_EXLM,KC_MINUS, KC_PLUS,KC_EQUAL,KC_TILDE,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_UNDS, XXXXXXX,
+      XXXXXXX, KC_EXLM,KC_MINUS, KC_PLUS,KC_EQUAL,KC_TILDE,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_QUOT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_QUES,KC_SLASH, KC_ASTR, XXXXXXX, KC_CIRC,                      KC_PIPE,  KC_DLR, KC_LCBR, KC_RCBR, KC_PERC, XXXXXXX,
+      XXXXXXX, KC_QUES,KC_SLASH, KC_ASTR, XXXXXXX, KC_CIRC,                      KC_PIPE,  KC_DLR, KC_LCBR, KC_RCBR, KC_UNDS, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                          XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -178,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX, DT_PRNT,  AS_RPT, AS_TOGG, RGB_SPI, RGB_SPD,                       WI_CLO,  WD_CLO, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   DT_UP,   AS_UP, CW_TOGG, RGB_MOD,RGB_RMOD,                   C(S(KC_V)),  FZ_EXT,  FZ_LFT,  FZ_RGT, XXXXXXX, XXXXXXX,
+      XXXXXXX,   DT_UP,   AS_UP, CW_TOGG, RGB_MOD,RGB_RMOD,                      XXXXXXX,  FZ_EXT,  FZ_LFT,  FZ_RGT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, DT_DOWN, AS_DOWN, RGB_TOG, RGB_VAI, RGB_VAD,                      KC_MPLY, KC_MPRV, KC_VOLU, KC_VOLD, KC_MNXT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -214,56 +214,96 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 };
 
-// bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
-//   switch(keycode) {
-//     case DV_ARR:
-//       return true;
-//     default:
-//       return false;
-//   }
-// }
+bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
+  switch(keycode) {
+    case DV_ARR:
+    case KC_LBRC:
+    case KC_LPRN:
+    case KC_LCBR:
+    case KC_AMPR:
+    case KC_PLUS:
+    case KC_ASTR:
+    case KC_EXLM:
+    case KC_DLR:
+      return true;
+    default:
+      return false;
+  }
+}
 
-// void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-//   switch(keycode) {
-//     case KC_DOT:
-//       (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_DOT);
-//       break;
-//     case KC_SLSH:
-//       (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
-//       break;
-//     case KC_COMM:
-//       (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
-//       break;
-//     case DV_ARR:
-//       (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
-//       break;
-//     case KC_GRV:
-//       (shifted) ? SEND_STRING("``` ") : tap_code16(KC_GRV);
-//       break;
-//     default:
-//       if (shifted) {
-//         add_weak_mods(MOD_BIT(KC_LSFT));
-//       }
-//       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-//       register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
-//     }
-// }
+void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+  switch(keycode) {
+    case KC_DOT:
+      (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_DOT);
+      break;
+    case KC_SLSH:
+      (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
+      break;
+    case KC_COMM:
+      (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
+      break;
+    case DV_ARR:
+      (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
+      break;
+    case KC_GRV:
+      (shifted) ? SEND_STRING("``` ") : tap_code16(KC_GRV);
+      break;
+    case KC_LBRC:
+      (shifted) ? tap_code16(KC_RBRC) : tap_code16(KC_LBRC);
+      break;
+    case KC_LPRN:
+      (shifted) ? tap_code16(KC_RPRN) : tap_code16(KC_LPRN);
+      break;
+    case KC_LCBR:
+      (shifted) ? tap_code16(KC_RCBR) : tap_code16(KC_LCBR);
+      break;
+    case KC_AMPR:
+      (shifted) ? tap_code16(KC_PIPE) : tap_code16(KC_AMPR);
+      break;
+    case KC_PLUS:
+      (shifted) ? tap_code16(KC_MINUS) : tap_code16(KC_PLUS);
+      break;
+    case KC_ASTR:
+      (shifted) ? tap_code16(KC_SLASH) : tap_code16(KC_ASTR);
+      break;
+    case KC_EXLM:
+      (shifted) ? tap_code16(KC_QUES) : tap_code16(KC_AMPR);
+      break;
+    case KC_DLR:
+      (shifted) ? tap_code16(KC_PERC) : tap_code16(KC_DLR);
+      break;
+    default:
+      if (shifted) {
+        add_weak_mods(MOD_BIT(KC_LSFT));
+      }
+      // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+      register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+    }
+}
 
-// void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-//   switch(keycode) {
-//     case KC_DOT:
-//     case KC_SLSH:
-//     case KC_COMM:
-//     case DV_ARR:
-//     case KC_GRV:
-//       break;
-//     default:
-//       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-//       // The IS_RETRO check isn't really necessary here, always using
-//       // keycode & 0xFF would be fine.
-//       unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
-//   }
-// }
+void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+  switch(keycode) {
+    case KC_DOT:
+    case KC_SLSH:
+    case KC_COMM:
+    case DV_ARR:
+    case KC_GRV:
+    case KC_LBRC:
+    case KC_LPRN:
+    case KC_LCBR:
+    case KC_AMPR:
+    case KC_PLUS:
+    case KC_ASTR:
+    case KC_EXLM:
+    case KC_DLR:
+      break;
+    default:
+      // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
+      // The IS_RETRO check isn't really necessary here, always using
+      // keycode & 0xFF would be fine.
+      unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+  } 
+}
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }

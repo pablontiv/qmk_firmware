@@ -71,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define HOME_J RSFT_T(KC_J)
 #define HOME_K RCTL_T(KC_K)
 #define HOME_L LALT_T(KC_L)
-#define HOME_SCLN RGUI_T(KC_SCLN)
+#define HOME_SCLN RGUI_T(KC_QUOT)
 
 enum layer_names {
   _QWERTY,
@@ -130,12 +130,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, DV_BRKP, DV_SOUT,  DV_SIN, DV_SOVR,  DV_BLD,                   C(S(KC_V)),C(KC_F),C(S(KC_F)),C(KC_H), C(KC_S), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, DV_NXER, XXXXXXX, DV_REFS, DV_IMPL,   KC_F5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, DV_NXER, XXXXXXX, DV_REFS, DV_IMPL,   KC_F5,                      XXXXXXX, C(KC_B), C(KC_P), XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
-
 
     [_FUNC] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -148,15 +147,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
-
+  //   [_SYMBOL] = LAYOUT_split_3x6_3(
+  // //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+  //     XXXXXXX,  KC_GRV,   KC_LT,   KC_GT, XXXXXXX, XXXXXXX,                       KC_DLR,  DV_ARR, KC_LBRC, KC_RBRC, KC_HASH, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //     XXXXXXX, KC_EXLM,KC_MINUS, KC_PLUS,KC_EQUAL,KC_TILDE,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_SCLN, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //     XXXXXXX, KC_QUES,KC_SLASH, KC_ASTR, XXXXXXX, KC_CIRC,                      KC_PIPE,  KC_DLR, KC_LCBR, KC_RCBR, KC_UNDS, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+  //                                         XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
+  //                                     //`--------------------------'  `--------------------------'
+  // ),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,  KC_GRV,   KC_LT,   KC_GT, XXXXXXX, XXXXXXX,                      KC_DLR,  DV_ARR, KC_LBRC, KC_RBRC, KC_HASH, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_DLR,  DV_ARR, KC_LBRC,   KC_LT,  KC_GRV, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_EXLM,KC_MINUS, KC_PLUS,KC_EQUAL,KC_TILDE,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_QUOT, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,KC_TILDE,                      KC_EXLM,KC_EQUAL, KC_LPRN, KC_PLUS, KC_SCLN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_QUES,KC_SLASH, KC_ASTR, XXXXXXX, KC_CIRC,                      KC_PIPE,  KC_DLR, KC_LCBR, KC_RCBR, KC_UNDS, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CIRC,                        KC_AT, KC_AMPR, KC_LCBR, KC_ASTR, KC_UNDS, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -225,6 +234,8 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
     case KC_ASTR:
     case KC_EXLM:
     case KC_DLR:
+    case KC_LT:
+    case KC_AT:
       return true;
     default:
       return false;
@@ -234,13 +245,13 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
 void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
   switch(keycode) {
     case KC_DOT:
-      (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_DOT);
+      (shifted) ? tap_code16(KC_MINUS) : tap_code16(KC_DOT);
       break;
     case KC_SLSH:
       (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
       break;
     case KC_COMM:
-      (shifted) ? tap_code16(KC_MINUS) : SEND_STRING(", ");
+      (shifted) ? tap_code16(KC_UNDS) : SEND_STRING(", ");
       break;
     case DV_ARR:
       (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
@@ -267,10 +278,16 @@ void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
       (shifted) ? tap_code16(KC_SLASH) : tap_code16(KC_ASTR);
       break;
     case KC_EXLM:
-      (shifted) ? tap_code16(KC_QUES) : tap_code16(KC_AMPR);
+      (shifted) ? tap_code16(KC_QUES) : tap_code16(KC_EXLM);
       break;
     case KC_DLR:
       (shifted) ? tap_code16(KC_PERC) : tap_code16(KC_DLR);
+      break;
+    case KC_LT:
+      (shifted) ? tap_code16(KC_GT) : tap_code16(KC_LT);
+      break;
+    case KC_AT:
+      (shifted) ? tap_code16(KC_HASH) : tap_code16(KC_AT);
       break;
     default:
       if (shifted) {
@@ -296,6 +313,8 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
     case KC_ASTR:
     case KC_EXLM:
     case KC_DLR:
+    case KC_LT:
+    case KC_AT:
       break;
     default:
       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift

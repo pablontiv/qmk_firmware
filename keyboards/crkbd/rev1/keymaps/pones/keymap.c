@@ -163,9 +163,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_DLR,  DV_ARR, KC_LBRC,   KC_LT,  KC_GRV, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,KC_TILDE,                      KC_EXLM,KC_EQUAL, KC_LPRN, KC_PLUS, KC_SCLN, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_EXLM,KC_EQUAL, KC_LPRN, KC_PLUS, KC_SCLN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CIRC,                        KC_AT, KC_AMPR, KC_LCBR, KC_ASTR, KC_UNDS, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_CIRC, KC_AMPR, KC_LCBR, KC_ASTR,   KC_AT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -236,6 +236,8 @@ bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
     case KC_DLR:
     case KC_LT:
     case KC_AT:
+    case KC_EQUAL:
+    case KC_CIRC:
       return true;
     default:
       return false;
@@ -289,6 +291,12 @@ void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
     case KC_AT:
       (shifted) ? tap_code16(KC_HASH) : tap_code16(KC_AT);
       break;
+    case KC_EQUAL:
+      (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_EQUAL);
+      break;
+    case KC_CIRC:
+      (shifted) ? tap_code16(KC_TILDE) : tap_code16(KC_CIRC);
+      break;
     default:
       if (shifted) {
         add_weak_mods(MOD_BIT(KC_LSFT));
@@ -315,6 +323,8 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
     case KC_DLR:
     case KC_LT:
     case KC_AT:
+    case KC_EQUAL:
+    case KC_CIRC:
       break;
     default:
       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift

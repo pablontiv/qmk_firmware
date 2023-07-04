@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM 250
 
-#define AUTO_SHIFT_TIMEOUT 200
+#define AUTO_SHIFT_TIMEOUT 150
 #define NO_AUTO_SHIFT_ALPHA
   
 #ifdef OLED_ENABLE

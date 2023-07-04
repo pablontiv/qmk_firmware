@@ -147,29 +147,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
-  //   [_SYMBOL] = LAYOUT_split_3x6_3(
-  // //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-  //     XXXXXXX,  KC_GRV,   KC_LT,   KC_GT, XXXXXXX, XXXXXXX,                       KC_DLR,  DV_ARR, KC_LBRC, KC_RBRC, KC_HASH, XXXXXXX,
-  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-  //     XXXXXXX, KC_EXLM,KC_MINUS, KC_PLUS,KC_EQUAL,KC_TILDE,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_SCLN, XXXXXXX,
-  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-  //     XXXXXXX, KC_QUES,KC_SLASH, KC_ASTR, XXXXXXX, KC_CIRC,                      KC_PIPE,  KC_DLR, KC_LCBR, KC_RCBR, KC_UNDS, XXXXXXX,
-  // //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-  //                                         XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
-  //                                     //`--------------------------'  `--------------------------'
-  // ),
-
     [_SYMBOL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_DLR,  DV_ARR, KC_LBRC,   KC_LT,  KC_GRV, XXXXXXX,
+      XXXXXXX,  KC_GRV,   KC_LT,   KC_GT, XXXXXXX, XXXXXXX,                      KC_PERC,  DV_ARR, KC_LBRC, KC_RBRC, KC_HASH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_EXLM,KC_EQUAL, KC_LPRN, KC_PLUS, KC_SCLN, XXXXXXX,
+      XXXXXXX, KC_EXLM,KC_MINUS, KC_PLUS,KC_EQUAL,KC_TILDE,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_SCLN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_CIRC, KC_AMPR, KC_LCBR, KC_ASTR,   KC_AT, XXXXXXX,
+      XXXXXXX, KC_QUES,KC_SLASH, KC_ASTR, XXXXXXX, KC_CIRC,                      KC_PIPE,  KC_DLR, KC_LCBR, KC_RCBR, KC_UNDS, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
+
+  //   [_SYMBOL] = LAYOUT_split_3x6_3(
+  // //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+  //     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_DLR,  DV_ARR, KC_LBRC,   KC_LT,  KC_GRV, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_EXLM,KC_EQUAL, KC_LPRN, KC_PLUS, KC_SCLN, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_CIRC, KC_AMPR, KC_LCBR, KC_ASTR,   KC_AT, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+  //                                         XXXXXXX, XXXXXXX, KC_LSFT,    XXXXXXX, XXXXXXX, XXXXXXX
+  //                                     //`--------------------------'  `--------------------------'
+  // ),
 
     [_NAV] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.

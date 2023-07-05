@@ -31,8 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_TERM 250
 
-#define AUTO_SHIFT_TIMEOUT 150
-#define NO_AUTO_SHIFT_ALPHA
+#define AUTO_SHIFT_TIMEOUT 200
+// #define NO_AUTO_SHIFT_ALPHA
+#define NO_AUTO_SHIFT_NUMERIC
   
 #ifdef OLED_ENABLE
 #   define SPLIT_LAYER_STATE_ENABLE

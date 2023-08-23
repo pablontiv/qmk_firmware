@@ -71,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define HM_J RSFT_T(KC_J)
 #define HM_K RCTL_T(KC_K)
 #define HM_L LALT_T(KC_L)
-#define HM_SCLN RGUI_T(KC_QUOT)
+#define HM_SCLN RGUI_T(KC_SCLN)
 
 enum layer_names {
   _QWERTY,
@@ -126,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                    KC_EXLM, KC_QUES, KC_LBRC, KC_RBRC,  KC_GRV, XXXXXXX,
+      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                    KC_QUES, KC_EXLM, KC_LBRC, KC_RBRC,  KC_GRV, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_HASH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|

@@ -81,6 +81,7 @@ enum layer_names {
   _FUNC,
   _DEV,
   _UTIL,
+  _BUTTON,
 };
 
 #define L_SPC LT(_NUMBER, KC_SPACE)
@@ -89,6 +90,9 @@ enum layer_names {
 #define L_ENT LT(_FUNC, KC_ENTER)
 #define L_DEL LT(_DEV, KC_DEL)
 #define L_BK LT(_UTIL, KC_BSPC)
+#define L_Z LT(_BUTTON, KC_Z)
+#define L_SLSH LT(_BUTTON, KC_SLSH)
+
 
 enum custom_keycodes {
   DV_ARR = SAFE_RANGE, // Print C# lambda arrow
@@ -106,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    HM_A,    HM_S,    HM_D,    HM_F,    KC_G,                         KC_H,    HM_J,    HM_K,    HM_L, HM_SCLN, KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, XXXXXXX,
+      XXXXXXX,     L_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,  L_SLSH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             L_ESC,   L_TAB,   L_SPC,      L_ENT,   L_DEL,    L_BK
                                       //`--------------------------'  `--------------------------'
@@ -114,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  
     [_NUMBER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                    KC_TILD,    KC_7,    KC_8,    KC_9, KC_ASTR, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_TILD,    KC_7,    KC_8,    KC_9, KC_ASTR, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                       KC_EQL,    KC_4,    KC_5,    KC_6, KC_PLUS, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -126,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                    KC_QUES, KC_EXLM, KC_LBRC, KC_RBRC,  KC_GRV, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_QUES, KC_EXLM, KC_LBRC, KC_RBRC,  KC_GRV, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_AMPR,   KC_AT, KC_LPRN, KC_RPRN, KC_HASH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -138,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                     KC_INS, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_INS, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_CAPS, KC_LEFT,   KC_UP, KC_DOWN,KC_RIGHT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -150,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FUNC] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4, KC_PSCR,                   C(S(KC_V)), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), C(KC_Y),
+      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4, KC_PSCR,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8, KC_PAUS,                      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -162,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_DEV] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,  DV_TRM, DV_NVBW, DV_NVFW, DV_CMNT,DV_UNCMT,                   C(S(KC_V)), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), C(KC_Y),
+      XXXXXXX,  DV_TRM, DV_NVBW, DV_NVFW, DV_CMNT,DV_UNCMT,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, DV_BRKP, DV_SOUT,  DV_SIN, DV_SOVR,  DV_BLD,                      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -179,6 +183,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX,   DT_UP, XXXXXXX, XXXXXXX, RGB_MOD,RGB_RMOD,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, DT_DOWN, XXXXXXX, RGB_TOG, RGB_VAI, RGB_VAD,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+    [_BUTTON] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                 C(S(KC_V)), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), C(KC_Y),
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, XXXXXXX, C(KC_S), C(KC_F),C(S(KC_F)),                 C(S(KC_F)), C(KC_F), C(KC_S), XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -211,117 +227,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   return true;
 };
-
-// bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
-//   switch(keycode) {
-//     case DV_ARR:
-//     case KC_LBRC:
-//     case KC_LPRN:
-//     case KC_LCBR:
-//     case KC_AMPR:
-//     case KC_PLUS:
-//     case KC_ASTR:
-//     case KC_EXLM:
-//     case KC_DLR:
-//     case KC_LT:
-//     case KC_AT:
-//     case KC_EQUAL:
-//     case KC_CIRC:
-//       return true;
-//     default:
-//       return false;
-//   }
-// }
-
-// void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-//   switch(keycode) {
-//     case KC_DOT:
-//       (shifted) ? tap_code16(KC_MINUS) : tap_code16(KC_DOT);
-//       break;
-//     case KC_SLSH:
-//       (shifted) ? tap_code16(KC_BSLS) : tap_code16(KC_SLSH);
-//       break;
-//     case KC_COMM:
-//       (shifted) ? tap_code16(KC_UNDS) : SEND_STRING(", ");
-//       break;
-//     case DV_ARR:
-//       (shifted) ? SEND_STRING("/>") : SEND_STRING("=>");
-//       break;
-//     case KC_GRV:
-//       (shifted) ? SEND_STRING("``` ") : tap_code16(KC_GRV);
-//       break;
-//     case KC_LBRC:
-//       (shifted) ? tap_code16(KC_RBRC) : tap_code16(KC_LBRC);
-//       break;
-//     case KC_LPRN:
-//       (shifted) ? tap_code16(KC_RPRN) : tap_code16(KC_LPRN);
-//       break;
-//     case KC_LCBR:
-//       (shifted) ? tap_code16(KC_RCBR) : tap_code16(KC_LCBR);
-//       break;
-//     case KC_AMPR:
-//       (shifted) ? tap_code16(KC_PIPE) : tap_code16(KC_AMPR);
-//       break;
-//     case KC_PLUS:
-//       (shifted) ? tap_code16(KC_MINUS) : tap_code16(KC_PLUS);
-//       break;
-//     case KC_ASTR:
-//       (shifted) ? tap_code16(KC_SLASH) : tap_code16(KC_ASTR);
-//       break;
-//     case KC_EXLM:
-//       (shifted) ? tap_code16(KC_QUES) : tap_code16(KC_EXLM);
-//       break;
-//     case KC_DLR:
-//       (shifted) ? tap_code16(KC_PERC) : tap_code16(KC_DLR);
-//       break;
-//     case KC_LT:
-//       (shifted) ? tap_code16(KC_GT) : tap_code16(KC_LT);
-//       break;
-//     case KC_AT:
-//       (shifted) ? tap_code16(KC_HASH) : tap_code16(KC_AT);
-//       break;
-//     case KC_EQUAL:
-//       (shifted) ? tap_code16(KC_UNDS) : tap_code16(KC_EQUAL);
-//       break;
-//     case KC_CIRC:
-//       (shifted) ? tap_code16(KC_TILDE) : tap_code16(KC_CIRC);
-//       break;
-//     default:
-//       if (shifted) {
-//         add_weak_mods(MOD_BIT(KC_LSFT));
-//       }
-//       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-//       register_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
-//     }
-// }
-
-// void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
-//   switch(keycode) {
-//     case KC_DOT:
-//     case KC_SLSH:
-//     case KC_COMM:
-//     case DV_ARR:
-//     case KC_GRV:
-//     case KC_LBRC:
-//     case KC_LPRN:
-//     case KC_LCBR:
-//     case KC_AMPR:
-//     case KC_PLUS:
-//     case KC_ASTR:
-//     case KC_EXLM:
-//     case KC_DLR:
-//     case KC_LT:
-//     case KC_AT:
-//     case KC_EQUAL:
-//     case KC_CIRC:
-//       break;
-//     default:
-//       // & 0xFF gets the Tap key for Tap Holds, required when using Retro Shift
-//       // The IS_RETRO check isn't really necessary here, always using
-//       // keycode & 0xFF would be fine.
-//       unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
-//   } 
-// }
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }

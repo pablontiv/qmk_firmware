@@ -81,7 +81,7 @@ enum layer_names {
   _FUNC,
   _DEV,
   _UTIL,
-  _BUTTON,
+  _GAME,
 };
 
 #define L_SPC LT(_NUMBER, KC_SPACE)
@@ -89,9 +89,7 @@ enum layer_names {
 #define L_ESC LT(_NAV, KC_ESCAPE)
 #define L_ENT LT(_FUNC, KC_ENTER)
 #define L_DEL LT(_DEV, KC_DEL)
-#define L_BK LT(_BUTTON, KC_BSPC)
-#define L_Z LT(_UTIL, KC_Z)
-#define L_SLSH LT(_UTIL, KC_SLSH)
+#define L_BK LT(_UTIL, KC_BSPC)
 
 
 enum custom_keycodes {
@@ -110,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    HM_A,    HM_S,    HM_D,    HM_F,    KC_G,                         KC_H,    HM_J,    HM_K,    HM_L, HM_SCLN, KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,     L_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,  L_SLSH, XXXXXXX,
+      XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             L_ESC,   L_TAB,   L_SPC,      L_ENT,   L_DEL,    L_BK
                                       //`--------------------------'  `--------------------------'
@@ -178,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_UTIL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, DT_PRNT, XXXXXXX, XXXXXXX, RGB_SPI, RGB_SPD,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    TO(_GAME), DT_PRNT, XXXXXXX, XXXXXXX, RGB_SPI, RGB_SPD,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   DT_UP, XXXXXXX, XXXXXXX, RGB_MOD,RGB_RMOD,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -188,17 +186,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-    [_BUTTON] = LAYOUT_split_3x6_3(
+    [_GAME] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                 C(S(KC_V)), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), C(KC_Y),
+         KC_1,    KC_4,    KC_Q,    KC_W,    KC_E,    KC_R,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,TO(_QWERTY),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, C(KC_P), C(KC_B), C(KC_S), C(KC_F),C(S(KC_F)),                 C(S(KC_F)), C(KC_F), C(KC_S), XXXXXXX, XXXXXXX, XXXXXXX,
+         KC_2,    KC_H,    KC_A,    KC_S,    KC_D,    KC_F,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+         KC_3,    KC_Z,    KC_G,    KC_C,    KC_V,    KC_T,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                          KC_LCTL, KC_LSFT,  KC_SPC,    KC_ESC, KC_TAB, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   )
+
+  //   [_BUTTON] = LAYOUT_split_3x6_3(
+  // //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+  //     C(KC_Y), C(KC_Z), C(KC_X), C(KC_C), C(KC_V),C(S(KC_V)),                 C(S(KC_V)), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), C(KC_Y),
+  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //     XXXXXXX, C(KC_P), C(KC_B), C(KC_S), C(KC_F),C(S(KC_F)),                 C(S(KC_F)), C(KC_F), C(KC_S), XXXXXXX, XXXXXXX, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  // //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+  //                                         XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+  //                                     //`--------------------------'  `--------------------------'
+  // )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
